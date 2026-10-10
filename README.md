@@ -36,3 +36,10 @@ The deliberate trade-off here is determinism over real-time accuracy. The clock 
 - **Cost above capacity** also returns `Infinity` from `timeUntilAvailable`; the bucket can never hold that many tokens at once.
 - **Clock units are your problem.** If your clock returns milliseconds and you set `refillRate` to `0.001`, you get one token per second. The library does not assume or convert units.
 - **Clock skew backwards** does not refill the bucket. This is intentional: better to under-serve than to hand out tokens due to NTP drift.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
