@@ -1,6 +1,6 @@
 {
   "name": "token-bucket",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Bursty rate limiting via monotonic token refills.",
   "type": "module",
   "main": "src/index.js",
